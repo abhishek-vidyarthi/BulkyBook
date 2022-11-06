@@ -22,50 +22,26 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
         }
 
         //GET
-        public IActionResult Create()
+        public IActionResult Upsert(int? id)
         {
-            return View();
-        }
-
-        //POST
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(CoverType obj)
-        {
-
-            if (ModelState.IsValid)
-            {
-                _unitOfWork.CoverType.Add(obj);
-                _unitOfWork.Save();
-                TempData["success"] = "CoverType created successfully!";
-                return RedirectToAction("Index");
-            }
-
-            return View(obj);
-        }
-
-        //GET
-        public IActionResult Edit(int? id)
-        {
+            Product product = new();
             if (id == null || id == 0)
             {
-                return NotFound();
+                //Created Product
+                return View(product);
+            }
+            else
+            { 
+                //Update Product
             }
             
-            var coverTypeFromDbFirst = _unitOfWork.CoverType.GetFirstOrDefault(c => c.Id == id);
-            
-
-            if (coverTypeFromDbFirst == null)
-            {
-                return NotFound();
-            }
-            return View(coverTypeFromDbFirst);
+            return View(product);
         }
 
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(CoverType obj)
+        public IActionResult Upsert(CoverType obj)
         {
 
             if (ModelState.IsValid)
