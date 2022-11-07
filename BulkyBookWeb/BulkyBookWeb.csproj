@@ -24,6 +24,7 @@
   <ItemGroup>
     <Folder Include="Views\Category\" />
     <Folder Include="Views\Home\" />
+    <Folder Include="wwwroot\images\products\" />
   </ItemGroup>
 
 </Project>
