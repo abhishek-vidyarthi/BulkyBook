@@ -97,7 +97,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
                 }
 
                 //_unitOfWork.CoverType.Update(obj);
-                _unitOfWork.Product.Add(obj.Product);   
+
                 _unitOfWork.Save();
                 TempData["success"] = "Product created successfully!";
                 return RedirectToAction("Index");
