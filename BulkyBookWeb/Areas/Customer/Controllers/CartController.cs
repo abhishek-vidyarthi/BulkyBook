@@ -128,7 +128,7 @@ namespace BulkyBookWeb.Areas.Customer.Controllers
 			if (applicationUser.CompanyId.GetValueOrDefault() == 0)
 			{
 				//stripe settings 
-				var domain = "https://localhost:44300/";
+				var domain = "https://localhost:44379/";
 				var options = new SessionCreateOptions
 				{
 					PaymentMethodTypes = new List<string>
@@ -187,6 +187,7 @@ namespace BulkyBookWeb.Areas.Customer.Controllers
 				//check the stripe status
 				if (session.PaymentStatus.ToLower() == "paid")
 				{
+					_unitOfWork.OrderHeader.UpdateStripePaymentID(id, orderHeader.SessionId, session.PaymentIntentId);
 					_unitOfWork.OrderHeader.UpdateStatus(id, SD.StatusApproved, SD.PaymentStatusApproved);
 					_unitOfWork.Save();
 				}
